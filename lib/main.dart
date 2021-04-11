@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 void main() {
   runApp(MyApp());
@@ -103,11 +104,81 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: buildSpeedDial(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.architecture_rounded), label: 'Measure'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.data_usage_rounded), label: 'Data'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline_rounded), label: 'About')
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+SpeedDial buildSpeedDial() {
+  return SpeedDial(
+    /// both default to 16
+    marginEnd: 18,
+    marginBottom: 20,
+    // animatedIcon: AnimatedIcons.menu_close,
+    // animatedIconTheme: IconThemeData(size: 22.0),
+    /// This is ignored if animatedIcon is non null
+    icon: Icons.menu,
+    activeIcon: Icons.remove,
+    // iconTheme: IconThemeData(color: Colors.grey[50], size: 30),
+
+    /// The label of the main button.
+    // label: Text("Open Speed Dial"),
+    /// The active label of the main button, Defaults to label if not specified.
+    // activeLabel: Text("Close Speed Dial"),
+    /// Transition Builder between label and activeLabel, defaults to FadeTransition.
+    // labelTransitionBuilder: (widget, animation) => ScaleTransition(scale: animation,child: widget),
+    /// The below button size defaults to 56 itself, its the FAB size + It also affects relative padding and other elements
+    buttonSize: 56.0,
+    visible: true,
+
+    /// If true user is forced to close dial manually
+    /// by tapping main button and overlay is not rendered.
+    closeManually: false,
+    curve: Curves.bounceIn,
+    overlayColor: Colors.white,
+    overlayOpacity: 0.5,
+    tooltip: 'Speed Dial',
+    heroTag: 'speed-dial-hero-tag',
+    foregroundColor: Colors.white,
+    backgroundColor: Colors.blueAccent,
+    elevation: 2.0,
+    shape: CircleBorder(),
+
+    children: [
+      SpeedDialChild(
+        child: Icon(Icons.accessibility),
+        backgroundColor: Colors.red,
+        label: 'First',
+        labelStyle: TextStyle(fontSize: 18.0),
+        onTap: () => print('FIRST CHILD'),
+        onLongPress: () => print('FIRST CHILD LONG PRESS'),
+      ),
+      SpeedDialChild(
+        child: Icon(Icons.brush),
+        backgroundColor: Colors.blue,
+        label: 'Second',
+        labelStyle: TextStyle(fontSize: 18.0),
+        onTap: () => print('SECOND CHILD'),
+        onLongPress: () => print('SECOND CHILD LONG PRESS'),
+      ),
+      SpeedDialChild(
+        child: Icon(Icons.keyboard_voice),
+        backgroundColor: Colors.green,
+        label: 'Third',
+        labelStyle: TextStyle(fontSize: 18.0),
+        onTap: () => print('THIRD CHILD'),
+        onLongPress: () => print('THIRD CHILD LONG PRESS'),
+      ),
+    ],
+  );
 }
