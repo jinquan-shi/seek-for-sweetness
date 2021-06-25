@@ -1,10 +1,24 @@
 import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:seek_for_sweetness/UI/pages_UI.dart';
+import 'package:seek_for_sweetness/bluetooth_connection/connect.dart';
 
-void main() {
-  runApp(MyApp());
+List<CameraDescription> cameras;
+CameraController controller;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  cameras = await availableCameras();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<BLEMsg>(create: (_) => BLEMsg()),
+      ChangeNotifierProvider<AppleData>(create: (_) => AppleData()),
+    ],
+    child: MyApp(),
+  ));
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
         SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -20,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -43,6 +57,14 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    controller = CameraController(cameras[0], ResolutionPreset.medium);
+    controller = CameraController(cameras[0], ResolutionPreset.medium);
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
   List<Widget> _pageItems = [
@@ -77,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage>
           Icons.add,
           size: 36,
         ),
-        onPressed: _pressAdd,
+        onPressed: _pressMeasure,
         backgroundColor: Colors.yellow,
         foregroundColor: Colors.black,
       ),
@@ -91,5 +113,13 @@ class _MyHomePageState extends State<MyHomePage>
     super.dispose();
   }
 
-  void _pressAdd() {}
+  // Measure.
+  void _pressMeasure() {
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => new DevicesPage(
+                  title: 'The second page.',
+                )));
+  }
 }

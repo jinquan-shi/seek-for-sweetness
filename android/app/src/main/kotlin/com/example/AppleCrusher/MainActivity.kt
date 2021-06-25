@@ -1,4 +1,4 @@
-package com.example.seek_for_sweetness
+package com.sjq.applecrusher
 
 import io.flutter.embedding.android.FlutterActivity
 
