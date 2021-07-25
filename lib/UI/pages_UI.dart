@@ -75,14 +75,14 @@ class AboutPage extends StatelessWidget {
   // Maintain the list of open source licenses.
   final List _opensource = [
     {
-      'title': 'flutter',
+      'title': 'Flutter - Google',
       'subtitle_1': 'http://flutter.dev',
       'subtitle_2': 'Apache 2.0',
       'leading': Icons.looks_one
     },
     {
-      'title': 'AndroidX',
-      'subtitle_1': 'http://flutter.dev',
+      'title': 'AndroidX - Google',
+      'subtitle_1': 'http://source.google.com',
       'subtitle_2': 'Apache 2.0',
       'leading': Icons.looks_two
     }
@@ -320,7 +320,7 @@ class _MeasurePageState extends State<MeasurePage> {
                 height: 120,
               ),
               Text(
-                'Measuring',
+                'Measure',
                 style: GoogleFonts.getFont('Lato', fontSize: 40),
                 textAlign: TextAlign.left,
               )
