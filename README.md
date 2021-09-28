@@ -1,16 +1,12 @@
-# seek_for_sweetness
+# Seek for Sweetness
 
-This is the app for our Optical Application Experiments. The app is based on flutter. 
+This is the app for our Optical Application Experiments. The app is based on Flutter and desgined to pair with the Brixmeter designed by ourselves via BLE connection. Our aim is to optimize the functions and acurracy of the designed system continous, and cut down the cost of commercial Brixmeter.
 
-## Getting Started
+## Functions
 
-This project is a starting point for a Flutter application.
+- Store, view and manage the measured Brix-value ( Demonstrated through SQLite).
+- Scan nearby BLE devices and connect with target decive. 
+- Remotely control the measurement, get readouts from photodetectors through BLE and visualize them.
+- Classify the kind of apples with a simple classification model.
+- Forecast the Brix of the apple with Random Forest Algorithm.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
